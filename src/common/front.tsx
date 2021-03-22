@@ -29,6 +29,7 @@ function Front(props:any) {
             justifyContent: 'center',
             alignContent: 'center',
             position: props.position,
+            right: '7px',
             width: '100%',
             zIndex: 3
         }}>
