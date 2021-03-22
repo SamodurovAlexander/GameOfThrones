@@ -1,0 +1,4 @@
+export const RECENTLY_VIEWED = 'RECENTLY_VIEWED'
+export const ADD_FAVORITES = 'ADD_FAVORITES'
+export const DEL_FAVORITES = 'DEL_FAVORITES'
+export const INITIAL = 'INITIAL'
