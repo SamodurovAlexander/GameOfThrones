@@ -10,6 +10,7 @@ import Preloader from "../../common/preloader";
 function Houses() {
     const houses: any = useSelector((store:any) => store.houses)
     const [loading, setLoading] = useState(false);
+    const [nameHouse, setNameHouse] = useState(false);
     const dispatch = useDispatch()
     const getMore = () =>{
         setLoading(true)
@@ -17,6 +18,10 @@ function Houses() {
        let page = Math.ceil(length/10 + 1)
         let getMoreAction = asyncGetMore(page, 'houses', setLoading)
         dispatch(getMoreAction)
+    }
+    let housesFilteredName = houses
+    if(nameHouse){
+        housesFilteredName = houses.filter((house:any)=> house.name.includes(nameHouse))
     }
   return (
     <>
@@ -32,17 +37,33 @@ function Houses() {
             <Front img={housesImg} title={'houses'} height={'110px'} position={'relative'}/>
         </div>
 
-        <h1 style={{
-            display:'grid',
-            justifyContent:'center',
-            marginTop:'200px'
-        }}>filter</h1>
+       <div style={{
+                        display:'grid',
+                        justifyContent:'center',
+                        marginBottom: '200px'
+            }}>
+                <div style={{
+                        display:'grid',
+                        justifyContent:'center',
+                        marginTop:'200px',
+                        border: '1px solid white',
+                        textAlign: 'center',
+                        width: '500px'
+                    }}>
+                    <h1 style={{
+                        display:'grid',
+                        justifyContent:'center',
+                    }}>filter</h1>
+                    <h2>house name:</h2>
+                    <input type="text" style={{marginBottom:'30px'}} onInput={(e:any)=>{setNameHouse(e.target.value)}}/>
+                </div>
+        </div>
         <div style={{
             display:'grid',
             justifyContent:'center',
         }}
         >
-            {houses.map((house: any) => <Card
+            {housesFilteredName.map((house: any) => <Card
                 key={house.url}
                 data={house}/>)
             }
