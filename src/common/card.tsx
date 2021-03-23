@@ -30,6 +30,7 @@ function Card(props:any) {
     <div style={{border: '1px solid white', margin: '20px', width: '500px', display: 'grid', justifyContent:'center', textAlign: 'center'}}>
         <Link to={`/${link}`} style={{textDecoration:'none',color: 'white',}}><h1>{props.data.name ? props.data.name : 'no name'}</h1></Link>
         {props.data.gender ? <h2>gender: {props.data.gender} </h2>: null}
+        {props.data.aliases ? <h2>aliases: {props.data.aliases} </h2>: null}
         {props.data.culture ? <h2>culture: {props.data.culture} </h2>: null}
         {props.data.born ? <h2> born: {props.data.born} </h2>: null}
         {props.data.numberOfPages ? <h2>number of pages: {props.data.numberOfPages} </h2>: null}

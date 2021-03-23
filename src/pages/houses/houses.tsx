@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Menu from "../../common/header/menu";
 import Front from "../../common/front";
 import housesImg from "../../assets/images/houses.png";
 import Card from "../../common/card";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { asyncGetMore} from "../../redux/actions/actions";
+import Preloader from "../../common/preloader";
 
 function Houses() {
     const houses: any = useSelector((store:any) => store.houses)
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch()
+    const getMore = () =>{
+        setLoading(true)
+       let length = houses.length
+       let page = Math.ceil(length/10 + 1)
+        let getMoreAction = asyncGetMore(page, 'houses', setLoading)
+        dispatch(getMoreAction)
+    }
   return (
     <>
         <Menu/>
@@ -29,11 +40,19 @@ function Houses() {
         <div style={{
             display:'grid',
             justifyContent:'center',
-        }}>
-
+        }}
+        >
             {houses.map((house: any) => <Card
                 key={house.url}
-                data={house}/>)}
+                data={house}/>)
+            }
+
+            {loading ? <Preloader/> : <button
+                onClick={getMore}
+                style={{background: 'white', border: 'none', fontSize: '20px'}}
+            >show more houses
+            </button>}
+
         </div>
 
 

@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Menu from "../../common/header/menu";
 import Front from "../../common/front";
 import Card from "../../common/card";
 import booksImg from "../../assets/images/book.png";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {asyncGetMore} from "../../redux/actions/actions";
+import Preloader from "../../common/preloader";
 
 function Books() {
+    const [loading, setLoading] = useState(false);
     const books: any = useSelector((store:any) => store.books)
+    const dispatch = useDispatch()
+    const getMore = () =>{
+        setLoading(true)
+       let length = books.length
+       let page = Math.ceil(length/10 + 1)
+        let getMoreAction = asyncGetMore(page, 'books', setLoading)
+        dispatch(getMoreAction)
+    }
   return (
     <>
         <Menu/>
@@ -32,7 +43,14 @@ function Books() {
         }}>
             {books.map((book: any) => <Card
                 key={book.url}
-                data={book}/>)}
+                data={book}/>)
+            }
+            {loading ? <Preloader/> : <button
+                onClick={getMore}
+                style={{background: 'white', border: 'none', fontSize: '20px'}}
+            >show more characters
+            </button>}
+
         </div>
 
 
