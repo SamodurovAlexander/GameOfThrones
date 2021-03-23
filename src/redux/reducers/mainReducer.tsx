@@ -1,5 +1,5 @@
 import {
-	RECENTLY_VIEWED,
+	ADD_RECENTLY_VIEWED,
 	ADD_FAVORITES,
 	DEL_FAVORITES,
 	INITIAL ,
@@ -15,14 +15,17 @@ const initialState = {
 	books: [{}],
 	houses:[{}],
 	favorites:[],
-	recentlyViewed:[{}]
+	recentlyViewed:[]
 }
 const mainReducer = (state=initialState, action:any) =>{
     switch (action.type){
 		case INITIAL:
         	return {...state, ...action.payload};
-		case RECENTLY_VIEWED:
-			return state
+		case ADD_RECENTLY_VIEWED:
+			console.log('recently')
+			let SRVC = JSON.parse(JSON.stringify(state))
+			SRVC.recentlyViewed.push(action.url)
+			return SRVC
 		case ADD_FAVORITES:
 			let SFC = JSON.parse(JSON.stringify(state))
 			SFC.favorites.push(action.url)

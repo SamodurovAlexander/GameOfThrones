@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Menu from "../common/header/menu";
 import {Link, useRouteMatch} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {asyncGetData, asyncGetItem} from "../redux/actions/actions";
+import {addToRecentlyViewed, asyncGetItem} from "../redux/actions/actions";
 import Preloader from "../common/preloader";
 
 
@@ -60,6 +60,13 @@ function Item() {
   if (data){
     table = tableGenerator(data)
   }
+
+  const recentlyViewed: any = useSelector((store:any) => store.recentlyViewed)
+  let isRecentlyViewed = recentlyViewed.includes(foreignUrl)
+  if (!isRecentlyViewed){
+        dispatch(addToRecentlyViewed(foreignUrl))
+  }
+
 
   return (
       <>

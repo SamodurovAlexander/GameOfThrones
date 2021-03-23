@@ -4,30 +4,23 @@ import Card from "../common/card";
 import {useSelector} from "react-redux";
 
 
-function dataFinder(allStore:any, url: any):any{
-  let foreignUrl = url
-  console.log(foreignUrl)
-  return allStore.filter((item:any) => item.url === foreignUrl)
-}
-
 function Favorites() {
     const favorites: any = useSelector((store:any) => store.favorites)
     const houses: any = useSelector((store:any) => store.houses)
-  const characters: any = useSelector((store:any) => store.characters)
-  const books: any = useSelector((store:any) => store.books)
-  const allStore: any = [...houses, ...characters, ...books]
-    console.log(allStore)
-    let data = favorites.map((item:any)=>{
-        return dataFinder(allStore, item)[0]
+    const characters: any = useSelector((store:any) => store.characters)
+    const books: any = useSelector((store:any) => store.books)
+    const allStore: any = [...houses, ...characters, ...books]
+    let data = favorites.map((url:any)=>{
+        return allStore.filter((item:any) => item.url === url)[0]
     })
-    console.log(data)
   return (
     <>
         <Menu/>
         <h1 style={{
             display:'grid',
             justifyContent:'center',
-            marginTop:'100px'
+            marginTop:'100px',
+            border:'1px solid white'
         }}>favorites</h1>
         <div style={{
             display:'grid',

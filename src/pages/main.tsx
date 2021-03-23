@@ -7,9 +7,16 @@ import charactersImg from '../assets/images/main.png'
 import booksImg from '../assets/images/book.png'
 import housesImg from '../assets/images/houses.png'
 
-function Main() {
-    const characters: any = useSelector((store:any) => store.characters)
 
+function Main() {
+    const recentlyViewed: any = useSelector((store:any) => store.recentlyViewed)
+    const houses: any = useSelector((store:any) => store.houses)
+    const characters: any = useSelector((store:any) => store.characters)
+    const books: any = useSelector((store:any) => store.books)
+    const allStore: any = [...houses, ...characters, ...books]
+    let dataRecentlyViewed = recentlyViewed.map((url:any)=>{
+        return allStore.filter((item:any) => item.url === url)[0]
+    })
   return (
     <>
         <Menu/>
@@ -26,18 +33,19 @@ function Main() {
             <Front img={housesImg} title={'houses'} height={'110px'} position={'relative'}/>
         </div>
 
-        <h1 style={{
+        {dataRecentlyViewed.length ? <h1 style={{
             display:'grid',
             justifyContent:'center',
-            marginTop:'200px'
-        }}>recently viewed</h1>
+            marginTop:'200px',
+            border: '1px solid white'
+        }}>recently viewed</h1> : null}
         <div style={{
             display:'grid',
             justifyContent:'center',
         }}>
-            {characters.map((character: any) => <Card
-                key={character.url}
-                data={character}/>)}
+            {dataRecentlyViewed.map((item: any) => <Card
+                key={item.url}
+                data={item}/>)}
         </div>
 
 

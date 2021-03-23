@@ -1,6 +1,5 @@
 import {getData, getItem, getMore} from "../../DAL/DAL";
 import {
-    RECENTLY_VIEWED,
     DEL_FAVORITES,
     ADD_FAVORITES,
     INITIAL,
@@ -9,7 +8,8 @@ import {
     ADD_ITEM_HOUSE,
     ADD_HOUSES,
     ADD_CHARACTERS,
-    ADD_BOOKS} from "./types";
+    ADD_BOOKS,
+    ADD_RECENTLY_VIEWED} from "./types";
 
 export const asyncGetData = ()=> {
     return async (dispatch:any) => {
@@ -50,6 +50,11 @@ export const addFavorites = ( url:string) => {
 }
 export const delFavorites = ( url:string) => {
     return{type: DEL_FAVORITES,
+            url: url,
+    }
+}
+export const addToRecentlyViewed = ( url:string) => {
+    return{type: ADD_RECENTLY_VIEWED,
             url: url,
     }
 }
