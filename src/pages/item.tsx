@@ -4,6 +4,10 @@ import {Link, useRouteMatch} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {addToRecentlyViewed, asyncGetItem} from "../redux/actions/actions";
 import Preloader from "../common/preloader";
+import {HousesType} from "./houses/houses";
+import {BookType} from "./books/books";
+import {CharacterType} from "./characters/characters";
+import {Dispatch} from "redux";
 
 
 function isLink(item:any){
@@ -37,8 +41,11 @@ function tableGenerator(data:any){
   return <><tr><th>characteristic</th><th>description</th></tr>{table}</>
 }
 
-function dataFinder(allStore:any, foreignUrl: any, dispatch:any, actionItem:any):any{
-  let fData = allStore.filter((item:any) => item.url === foreignUrl)
+function dataFinder(allStore:Array<HousesType|CharacterType|BookType>,
+                    foreignUrl: string,
+                    dispatch:Dispatch,
+                    actionItem:any):any{
+  let fData = allStore.filter((item:HousesType|CharacterType|BookType) => item.url === foreignUrl)
   if (fData.length) {
     return fData
   }else{
@@ -51,17 +58,17 @@ function Item() {
   let foreignUrl = 'https://anapioficeandfire.com/api' + url
   const dispatch = useDispatch()
   const actionItem = asyncGetItem(foreignUrl)
-  const houses: any = useSelector((store:any) => store.houses)
-  const characters: any = useSelector((store:any) => store.characters)
-  const books: any = useSelector((store:any) => store.books)
-  const allStore: any = [...houses, ...characters, ...books]
+  const houses: Array<HousesType> = useSelector((store:any) => store.houses)
+  const characters: Array<CharacterType> = useSelector((store:any) => store.characters)
+  const books: Array<BookType> = useSelector((store:any) => store.books)
+  const allStore: Array<HousesType|CharacterType|BookType> = [...houses, ...characters, ...books]
   let table:any = <Preloader />
   let data = dataFinder(allStore, foreignUrl, dispatch, actionItem)
   if (data){
     table = tableGenerator(data)
   }
 
-  const recentlyViewed: any = useSelector((store:any) => store.recentlyViewed)
+  const recentlyViewed: Array<string> = useSelector((store:any) => store.recentlyViewed)
   let isRecentlyViewed = recentlyViewed.includes(foreignUrl)
   if (!isRecentlyViewed){
         dispatch(addToRecentlyViewed(foreignUrl))

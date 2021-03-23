@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {addFavorites,delFavorites} from '../redux/actions/actions'
 
 function Card(props:any) {
-    const favorites: any = useSelector((store:any) => store.favorites)
+    const favorites: Array<string> = useSelector((store:any) => store.favorites)
     const checkedStar = '★'
     const uncheckedStar = '☆'
     let link = ''

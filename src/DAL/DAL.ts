@@ -15,7 +15,7 @@ export const getItem = async (url: string) =>{
     return item
 }
 
-export const getMore = async (page: any, name: string) =>{
+export const getMore = async (page: number, name: string) =>{
     const itemResp = await fetch(`https://anapioficeandfire.com/api/${name}?page=${page}&pageSize=10`)
     const item = await itemResp.json()
     return item

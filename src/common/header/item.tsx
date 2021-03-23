@@ -1,7 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 
-function Item(props: any) {
+type ItemPropsType = {
+    text: string
+}
+
+function Item(props:ItemPropsType) {
     let link = '/'
     if(props.text !== 'main'){
         link ='/' + props.text

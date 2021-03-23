@@ -9,23 +9,38 @@ import Preloader from "../../common/preloader";
 import DatePicker from "react-datepicker";
 require('react-datepicker/dist/react-datepicker.css');
 
+export type BookType = {
+    url: string
+    name: string
+    isbn: string
+    release: string
+    authors: Array<string>
+    numberOfPages: string
+    publiser: string
+    country: string
+    mediaType: string
+    released: string
+    characters: Array<string>
+    povCharacters: Array<string>
+}
+
 function Books() {
     const [loading, setLoading] = useState(false);
-    const unfilteredBooks: any = useSelector((store:any) => store.books)
+    const unfilteredBooks: Array<BookType> = useSelector((store:any) => store.books)
     const dispatch = useDispatch()
     const [dateRelease, setDateRelease] = useState(new Date());
-    const [bookName, setBookName] = useState();
+    const [bookName, setBookName] = useState('');
     let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(dateRelease);
     let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(dateRelease);
     let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(dateRelease);
     let formatDate = `${da}-${mo}-${ye}T00:00:00`
     let booksFilteredDate = unfilteredBooks
     if(dateRelease){
-        booksFilteredDate = unfilteredBooks.filter((book:any)=> book.release === formatDate)
+        booksFilteredDate = unfilteredBooks.filter((book:BookType)=> book.release === formatDate)
     }
     let booksFilteredName = booksFilteredDate
     if(bookName){
-        booksFilteredName = booksFilteredDate.filter((book:any)=> book.name.includes(bookName))
+        booksFilteredName = booksFilteredDate.filter((book:BookType)=> book.name.includes(bookName))
     }
     const getMore = () =>{
         setLoading(true)

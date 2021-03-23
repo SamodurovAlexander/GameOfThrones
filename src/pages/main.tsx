@@ -6,16 +6,19 @@ import Card from '../common/card'
 import charactersImg from '../assets/images/main.png'
 import booksImg from '../assets/images/book.png'
 import housesImg from '../assets/images/houses.png'
+import {HousesType} from "./houses/houses";
+import {BookType} from "./books/books";
+import {CharacterType} from "./characters/characters";
 
 
 function Main() {
-    const recentlyViewed: any = useSelector((store:any) => store.recentlyViewed)
-    const houses: any = useSelector((store:any) => store.houses)
-    const characters: any = useSelector((store:any) => store.characters)
-    const books: any = useSelector((store:any) => store.books)
-    const allStore: any = [...houses, ...characters, ...books]
-    let dataRecentlyViewed = recentlyViewed.map((url:any)=>{
-        return allStore.filter((item:any) => item.url === url)[0]
+    const recentlyViewed: Array<string> = useSelector((store:any) => store.recentlyViewed)
+    const houses: Array<HousesType> = useSelector((store:any) => store.houses)
+    const characters: Array<CharacterType> = useSelector((store:any) => store.characters)
+    const books: Array<BookType> = useSelector((store:any) => store.books)
+    const allStore: Array<BookType|CharacterType|HousesType> = [...houses, ...characters, ...books]
+    let dataRecentlyViewed = recentlyViewed.map((url:string)=>{
+        return allStore.filter((item:BookType|CharacterType|HousesType) => item.url === url)[0]
     })
   return (
     <>
@@ -43,7 +46,7 @@ function Main() {
             display:'grid',
             justifyContent:'center',
         }}>
-            {dataRecentlyViewed.map((item: any) => <Card
+            {dataRecentlyViewed.map((item: BookType|CharacterType|HousesType) => <Card
                 key={item.url}
                 data={item}/>)}
         </div>

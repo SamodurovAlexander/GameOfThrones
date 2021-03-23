@@ -19,10 +19,6 @@ function Menu() {
                 <Item text={'houses'}/>
                 <Item text={'favorites'}/>
           </ul>
-          {/*<div style={{*/}
-          {/*    display:'flex',*/}
-          {/*    justifyContent:'center'*/}
-          {/*}}>Game Of Thrones</div>*/}
           <div style={{display: 'flex', justifyContent:'center', width: '100%', position: 'relative', zIndex: 0}}>
             <img src={logo} alt="" style={{ height:'120px', position: 'absolute', top: '-20px'}}/>
           </div>

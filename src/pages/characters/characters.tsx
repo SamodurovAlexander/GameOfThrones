@@ -7,11 +7,19 @@ import {useDispatch, useSelector} from "react-redux";
 import {asyncGetMore} from "../../redux/actions/actions";
 import Preloader from "../../common/preloader";
 import DatePicker from "react-datepicker";
-
+export type CharacterType={
+    url: string
+    name: string
+    gender: string
+    culture: string
+    born: string
+    died: string
+    isAlive: boolean
+}
 function Characters() {
     const [loading, setLoading] = useState(false);
-    const unfilteredCharacters: any = useSelector((store:any) => store.characters)
-    const [characterName, setCharacterName] = useState();
+    const unfilteredCharacters: Array<CharacterType> = useSelector((store:any) => store.characters)
+    const [characterName, setCharacterName] = useState('');
     const [characterGender, setCharacterGender] = useState();
     const dispatch = useDispatch()
     const getMore = () =>{
@@ -23,11 +31,11 @@ function Characters() {
     }
     let charactersFilteredGender = unfilteredCharacters
     if(characterGender){
-        charactersFilteredGender = unfilteredCharacters.filter((character:any)=> character.gender === characterGender)
+        charactersFilteredGender = unfilteredCharacters.filter((character:CharacterType)=> character.gender === characterGender)
     }
     let charactersFilteredName = charactersFilteredGender
     if(characterName){
-        charactersFilteredName = charactersFilteredGender.filter((character:any)=> character.name.includes(characterName))
+        charactersFilteredName = charactersFilteredGender.filter((character:CharacterType)=> character.name.includes(characterName))
     }
   return (
     <>
@@ -74,7 +82,7 @@ function Characters() {
             display:'grid',
             justifyContent:'center',
         }}>
-            {charactersFilteredName.map((character: any) => <Card
+            {charactersFilteredName.map((character: CharacterType) => <Card
                 key={character.url}
                 data={character}/>)
             }

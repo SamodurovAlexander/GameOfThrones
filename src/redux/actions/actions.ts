@@ -10,18 +10,19 @@ import {
     ADD_CHARACTERS,
     ADD_BOOKS,
     ADD_RECENTLY_VIEWED} from "./types";
+import {Dispatch} from "redux";
 
 export const asyncGetData = ()=> {
-    return async (dispatch:any) => {
+    return async (dispatch:Dispatch) => {
         const data = await getData()
         dispatch({type: INITIAL, payload: data})
     }
 }
 export const asyncGetItem = ( url:string) => {
-    return async (dispatch:any) => {
-        let itemChecker:any = url.match(/books|characters|houses/gm)
+    return async (dispatch:Dispatch) => {
+        let itemChecker:RegExpMatchArray | null = url.match(/books|characters|houses/gm)
         const data = await getItem(url)
-        if(itemChecker[0] === 'books'){
+        if(!(itemChecker) || itemChecker[0] === 'books'){
             dispatch({type: ADD_ITEM_BOOK, payload: data})
         }else if(itemChecker[0] === 'characters'){
             dispatch({type: ADD_ITEM_CHARACTER, payload: data})
@@ -30,8 +31,8 @@ export const asyncGetItem = ( url:string) => {
         }
     }
 }
-export const asyncGetMore = (page: any, name: string, setLoading:any)=> {
-    return async (dispatch:any) => {
+export const asyncGetMore = (page: number, name: string, setLoading:any)=> {
+    return async (dispatch:Dispatch) => {
         const data = await getMore(page, name)
         setLoading(false)
         if(name === 'books'){

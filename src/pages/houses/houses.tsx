@@ -6,11 +6,28 @@ import Card from "../../common/card";
 import {useDispatch, useSelector} from "react-redux";
 import { asyncGetMore} from "../../redux/actions/actions";
 import Preloader from "../../common/preloader";
-
+export type HousesType = {
+        url:string
+        name: string
+        region: string
+        coatOfArms: string
+        words: string
+        titles: Array<string>
+        seats: Array<string>
+        currentLord: string
+        heir: string
+        overlord: string
+        founded: string
+        founder: string
+        diedOut: string
+        ancestralWeapons: Array<string>
+        cadetBranches: Array<string>
+        swornMembers: Array<string>
+}
 function Houses() {
-    const houses: any = useSelector((store:any) => store.houses)
+    const houses: Array<HousesType> = useSelector((store:any) => store.houses)
     const [loading, setLoading] = useState(false);
-    const [nameHouse, setNameHouse] = useState(false);
+    const [nameHouse, setNameHouse] = useState("");
     const dispatch = useDispatch()
     const getMore = () =>{
         setLoading(true)
@@ -21,7 +38,7 @@ function Houses() {
     }
     let housesFilteredName = houses
     if(nameHouse){
-        housesFilteredName = houses.filter((house:any)=> house.name.includes(nameHouse))
+        housesFilteredName = houses.filter((house:HousesType)=> house.name.includes(nameHouse))
     }
   return (
     <>

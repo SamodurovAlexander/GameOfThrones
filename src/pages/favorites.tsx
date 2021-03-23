@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 
 
 function Favorites() {
-    const favorites: any = useSelector((store:any) => store.favorites)
+    const favorites: Array<string> = useSelector((store:any) => store.favorites)
     const houses: any = useSelector((store:any) => store.houses)
     const characters: any = useSelector((store:any) => store.characters)
     const books: any = useSelector((store:any) => store.books)
