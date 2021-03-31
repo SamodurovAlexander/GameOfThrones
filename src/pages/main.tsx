@@ -6,9 +6,10 @@ import Card from '../common/card'
 import charactersImg from '../assets/images/main.png'
 import booksImg from '../assets/images/book.png'
 import housesImg from '../assets/images/houses.png'
-import {HousesType} from "./houses/houses";
-import {BookType} from "./books/books";
-import {CharacterType} from "./characters/characters";
+import HousesType from "./houses/type";
+import BookType from "./books/type";
+import CharacterType from "./characters/type";
+import './main.css';
 
 
 function Main() {
@@ -23,29 +24,14 @@ function Main() {
   return (
     <>
         <Menu/>
-        <div style={{
-            display:'flex',
-            justifyContent: 'space-around',
-            marginTop: '100px',
-            position: "relative",
-            height: '60vh',
-            zIndex: 2
-        }}>
+        <div className='mainFrontContainer'>
             <Front img={booksImg} title={'books'} height={'120px'} position={'relative'}/>
             <Front img={charactersImg} title={'characters'} height={'60vh'} position={'absolute'}/>
             <Front img={housesImg} title={'houses'} height={'110px'} position={'relative'}/>
         </div>
 
-        {dataRecentlyViewed.length ? <h1 style={{
-            display:'grid',
-            justifyContent:'center',
-            marginTop:'200px',
-            border: '1px solid white'
-        }}>recently viewed</h1> : null}
-        <div style={{
-            display:'grid',
-            justifyContent:'center',
-        }}>
+        {dataRecentlyViewed.length ? <h1 className='mainTitle'>recently viewed</h1> : null}
+        <div className='mainContainer'>
             {dataRecentlyViewed.map((item: BookType|CharacterType|HousesType) => <Card
                 key={item.url}
                 data={item}/>)}

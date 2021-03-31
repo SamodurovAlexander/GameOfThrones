@@ -7,15 +7,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {asyncGetMore} from "../../redux/actions/actions";
 import Preloader from "../../common/preloader";
 import DatePicker from "react-datepicker";
-export type CharacterType={
-    url: string
-    name: string
-    gender: string
-    culture: string
-    born: string
-    died: string
-    isAlive: boolean
-}
+import CharacterType from './type'
+import "./characters.css"
+
 function Characters() {
     const [loading, setLoading] = useState(false);
     const unfilteredCharacters: Array<CharacterType> = useSelector((store:any) => store.characters)
@@ -40,34 +34,13 @@ function Characters() {
   return (
     <>
         <Menu/>
-        <div style={{
-            display:'flex',
-            justifyContent: 'space-around',
-            marginTop: '100px',
-            position: "relative",
-            height: '60vh',
-            zIndex: 2
-        }}>
+        <div className="charactersFront">
             <Front img={charactersImg} title={'characters'} height={'60vh'} position={'absolute'}/>
         </div>
 
-        <div style={{
-                        display:'grid',
-                        justifyContent:'center',
-                        marginBottom: '200px'
-            }}>
-                <div style={{
-                        display:'grid',
-                        justifyContent:'center',
-                        marginTop:'200px',
-                        border: '1px solid white',
-                        textAlign: 'center',
-                        width: '500px'
-                    }}>
-                    <h1 style={{
-                        display:'grid',
-                        justifyContent:'center',
-                    }}>filter</h1>
+        <div className="filterContainer">
+                <div className="filter">
+                    <h1>filter</h1>
                     <h2>gender:</h2>
                     <select onChange={(e:any)=>{setCharacterGender(e.target.value)}}>
                       <option selected value={''}>all</option>
@@ -78,17 +51,13 @@ function Characters() {
                     <input type="text" style={{marginBottom:'30px'}} onInput={(e:any)=>{setCharacterName(e.target.value)}}/>
                 </div>
         </div>
-        <div style={{
-            display:'grid',
-            justifyContent:'center',
-        }}>
+        <div className='charactersContainer'>
             {charactersFilteredName.map((character: CharacterType) => <Card
                 key={character.url}
                 data={character}/>)
             }
             {loading ? <Preloader/> : <button
                 onClick={getMore}
-                style={{background: 'white', border: 'none', fontSize: '20px'}}
             >show more characters
             </button>}
         </div>

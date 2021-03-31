@@ -11,16 +11,8 @@ function Item(props:ItemPropsType) {
         link ='/' + props.text
     }
   return (
-    <li style={{
-        border:'1px solid white',
-        width:'90px',
-        textAlign:'center',
-        padding:'10px',
-        zIndex: 3
-    }}>
-        <Link to={link} style={{
-        textDecoration:'none',
-        color: 'white'}}>{props.text}</Link>
+    <li>
+        <Link to={link}>{props.text}</Link>
     </li>
   );
 }

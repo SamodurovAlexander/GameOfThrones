@@ -1,0 +1,14 @@
+.itemContainer{
+    display: flex;
+    justify-content:center;
+    margin-top:120px;
+    padding-bottom:20px;
+}
+.arrowBack{
+    font-size:50px ;
+    border: 1px solid white;
+    margin-right: 40px;
+}
+.itemContainer table{
+    border: 1px solid white
+}

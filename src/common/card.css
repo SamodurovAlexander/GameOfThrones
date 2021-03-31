@@ -1,0 +1,16 @@
+.card{
+    border: 1px solid white;
+    margin: 20px;
+    width: 500px;
+    display: grid;
+    justify-content:center;
+    text-align: center;
+}
+.card a{
+    text-decoration: none;
+    color: white;
+}
+.card .star{
+    font-size: 30px; 
+    cursor: pointer;
+}

@@ -4,10 +4,11 @@ import {Link, useRouteMatch} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {addToRecentlyViewed, asyncGetItem} from "../redux/actions/actions";
 import Preloader from "../common/preloader";
-import {HousesType} from "./houses/houses";
-import {BookType} from "./books/books";
-import {CharacterType} from "./characters/characters";
+import HousesType from "./houses/type";
+import BookType from "./books/type";
+import CharacterType from "./characters/type";
 import {Dispatch} from "redux";
+import './item.css';
 
 
 function isLink(item:any){
@@ -78,9 +79,9 @@ function Item() {
   return (
       <>
         <Menu/>
-      <div style={{display: 'flex', justifyContent:'center', marginTop:'120px', paddingBottom:'20px'}}>
-        <div style={{fontSize:'50px', border: '1px solid white', marginRight: '40px'}}>←</div>
-          <table style={{border: '1px solid white'}}>
+      <div className="itemContainer">
+        <div className='arrowBack'>←</div>
+          <table>
             {table}
           </table>
         </div>

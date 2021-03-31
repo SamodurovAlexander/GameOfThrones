@@ -9,11 +9,22 @@ import {
 	ADD_BOOKS,
 	ADD_CHARACTERS,
 	ADD_HOUSES,} from '../actions/types'
+import HousesType from '../../pages/houses/type'
+import CharacterType from '../../pages/characters/type'
+import BookType from '../../pages/books/type'
 
-const initialState = {
-    characters: [{}],
-	books: [{}],
-	houses:[{}],
+interface StateType{
+	characters: Array<CharacterType>
+	books: Array<BookType>
+	houses:Array<HousesType>
+	favorites:Array<string>
+	recentlyViewed:Array<string>
+}
+
+const initialState:StateType = {
+    characters: [],
+	books: [],
+	houses:[],
 	favorites:[],
 	recentlyViewed:[]
 }
