@@ -16,3 +16,13 @@
     display:grid;
     justify-content:center;
 }
+@media screen and (max-width: 800px) {
+    .mainFrontContainer{
+        display:grid;
+        justify-content: space-around;
+        margin-top: 100px;
+        position: relative;
+        height: auto;
+        z-index: 2;
+    }
+}

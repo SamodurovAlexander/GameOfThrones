@@ -12,3 +12,13 @@
 .itemContainer table{
     border: 1px solid white
 }
+
+@media screen and (max-width: 600px) {
+    .itemContainer{
+        justify-content: start;
+        margin-top:90px;
+        width: 90vw;
+        padding:10px;
+        overflow-y: hidden;
+    }
+}

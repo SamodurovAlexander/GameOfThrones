@@ -80,7 +80,7 @@ function Item() {
       <>
         <Menu/>
       <div className="itemContainer">
-        <div className='arrowBack'>←</div>
+        {/* <div className='arrowBack'>←</div> */}
           <table>
             {table}
           </table>
